@@ -7,7 +7,7 @@ import 'package:html/parser.dart' as html;
 
 void main() async {
   int start = 0;
-  int end = 30;
+  int end = 83296;
   int added = 0;
   int error = 0;
   Stopwatch stopwatch = Stopwatch()..start();
@@ -26,6 +26,12 @@ void main() async {
 
       jsonObject[current.word] = current.toJson();
       added++;
+
+      // update file every 300 iteration
+      if(i % 300 == 0){
+        File("lib/dictionnary.json").writeAsString(jsonEncode(jsonObject));
+        print("============ UPDATED FILE ============");
+      }
     } catch(e){
       print("Error with iteration $i, continuing...");
       error++;
