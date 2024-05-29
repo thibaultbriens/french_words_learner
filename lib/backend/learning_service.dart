@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:french_words_learner/backend/search_service.dart';
 import 'package:french_words_learner/shared/word.dart';
 import 'package:localstore/localstore.dart';
@@ -42,7 +45,7 @@ class LearningService{
   /// Add a level to a word
   void addLevel(String word) async{
     
-    Map<String, dynamic>? wordParameters = await wordInfo(word);
+    Map<String, dynamic> wordParameters = await wordInfo(word);
 
     if(wordParameters == null)
       return;
@@ -119,52 +122,53 @@ class LearningService{
       Duration timeToNow = DateTime(now.year, now.month, now.day).difference(DateTime(lastSeen.year, lastSeen.month, lastSeen.day));
 
       // add Word to list if time to now is equal or higher than level time
+      SearchService _searchService = SearchService();
       switch(level){
         case 1: 
           if(timeToNow.inDays >= 1){
-            Word wordObj = await SearchService().wordNameToObject(word);
+            Word wordObj = await _searchService.wordNameToObject(word);
             result.add(wordObj);
           }
           break; 
         case 2: 
           if(timeToNow.inDays >= 1){
-            Word wordObj = await SearchService().wordNameToObject(word);
+            Word wordObj = await _searchService.wordNameToObject(word);
             result.add(wordObj);
           }
           break; 
         case 3: 
           if(timeToNow.inDays >= 2){
-            Word wordObj = await SearchService().wordNameToObject(word);
+            Word wordObj = await _searchService.wordNameToObject(word);
             result.add(wordObj);
           }
           break; 
         case 4: 
           if(timeToNow.inDays >= 3){
-            Word wordObj = await SearchService().wordNameToObject(word);
+            Word wordObj = await _searchService.wordNameToObject(word);
             result.add(wordObj);
           }
           break; 
         case 5: 
           if(timeToNow.inDays >= 7){
-            Word wordObj = await SearchService().wordNameToObject(word);
+            Word wordObj = await _searchService.wordNameToObject(word);
             result.add(wordObj);
           }
           break; 
         case 6: 
           if(timeToNow.inDays >= 15){
-            Word wordObj = await SearchService().wordNameToObject(word);
+            Word wordObj = await _searchService.wordNameToObject(word);
             result.add(wordObj);
           }
           break; 
         case 7: 
           if(timeToNow.inDays >= 30){
-            Word wordObj = await SearchService().wordNameToObject(word);
+            Word wordObj = await _searchService.wordNameToObject(word);
             result.add(wordObj);
           }
           break; 
         case 8: 
           if(timeToNow.inDays >= 60){
-            Word wordObj = await SearchService().wordNameToObject(word);
+            Word wordObj = await _searchService.wordNameToObject(word);
             result.add(wordObj);
           }
           break; 

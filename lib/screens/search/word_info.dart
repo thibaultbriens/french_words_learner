@@ -6,8 +6,9 @@ import 'package:french_words_learner/shared/word.dart';
 class WordInfo extends StatefulWidget {
 
   Word word;
+  final bool onlyInfo; // Only to display words information => top right corner button not displayed
 
-  WordInfo(this.word);
+  WordInfo(this.word, {this.onlyInfo = false});
 
   @override
   State<WordInfo> createState() => _WordInfoState();
@@ -21,12 +22,18 @@ class _WordInfoState extends State<WordInfo> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: IconButton.filled(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back)
+        leading: Row(
+          children: [
+            SizedBox(width: 8,),
+            IconButton.filled(
+              onPressed: () => Navigator.pop(context),
+              icon: Icon(Icons.arrow_back)
+            ),
+          ],
         ),
-        actions: [
-          buildAddOrDeleteButton()
+        actions: widget.onlyInfo ? [] : [
+          buildAddOrDeleteButton(),
+          SizedBox(width: 8,),
         ],     
       ),
       body: Padding(

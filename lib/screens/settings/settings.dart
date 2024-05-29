@@ -9,11 +9,11 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Apprentissage", style: TextStyle(fontSize: 15)),
+          Text("Apprentissage", style: TextStyle(fontSize: 19)),
           SizedBox(height: 4,),
           Card(
             color: Colors.white,

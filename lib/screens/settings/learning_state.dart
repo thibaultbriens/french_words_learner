@@ -16,9 +16,15 @@ class _LearningStateState extends State<LearningState> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: IconButton.filled(
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.arrow_back)),
+        leading: Row(
+          children: [
+            SizedBox(width: 8,),
+            IconButton.filled(
+              onPressed: () => Navigator.pop(context),
+              icon: Icon(Icons.arrow_back)
+            ),
+          ],
+        ),
       ),
       body: FutureBuilder<List<String>>(
         future: LearningService().inLearningWords,
@@ -37,6 +43,7 @@ class _LearningStateState extends State<LearningState> {
           return learningStateWords.isEmpty
               ? Text("Not a soul here...")
               : ListView.builder(
+                padding: EdgeInsets.only(left: 10),
                   itemCount: learningStateWords.length,
                   itemBuilder: (context, index) {
                     return ListTile(

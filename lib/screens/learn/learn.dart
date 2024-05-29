@@ -10,6 +10,9 @@ import 'package:french_words_learner/screens/search/word_info.dart';
 import 'package:french_words_learner/shared/loader.dart';
 import 'package:french_words_learner/shared/word.dart';
 
+double cardWidth = 370;
+double cardHeight = 480;
+
 class Learn extends StatefulWidget {
   const Learn({super.key});
 
@@ -33,6 +36,11 @@ class _LearnState extends State<Learn> {
 
   @override
   Widget build(BuildContext context) {
+
+    // update card size depending on screen size
+    cardWidth = MediaQuery.of(context).size.width * 85 / 100;
+    cardHeight = MediaQuery.of(context).size.height * 60 / 100;
+
     return FutureBuilder<List<Word>>(
       future: LearningService().wordsToLearnToday,
       builder: (context, snapshot) {
@@ -67,8 +75,8 @@ class MyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 370,
-      height: 480,
+      width: cardWidth,
+      height: cardHeight,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
@@ -135,8 +143,8 @@ class _ExtractedWidgetState extends State<ExtractedWidget> {
           children: [
             Center(
               child: Container(
-                width: 370,
-                height: 480,
+                width: cardWidth,
+                height: cardHeight,
                 child: CardSwiper(
                   padding: EdgeInsets.zero,
                   numberOfCardsDisplayed: words.length < 3 ? words.length : 3,
@@ -147,7 +155,7 @@ class _ExtractedWidgetState extends State<ExtractedWidget> {
                     return FlipCard(
                       controller: flipCardCtrl,
                       speed: 400,
-                      front: MyCard(Text(words[index].word), flipCardCtrl),
+                      front: MyCard(Text(words[index].word, style: TextStyle(fontSize: 19),), flipCardCtrl),
                       back: MyCard(
                         Padding(
                           padding: const EdgeInsets.all(15),
@@ -155,11 +163,11 @@ class _ExtractedWidgetState extends State<ExtractedWidget> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Container(
-                                width: 370,
+                                width: cardWidth,
                                 height: 360,
                                 child: words[index].buildWordInfo()
                               ),
-                              TextButton(onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => WordInfo(words[index]))), child: Text("See more"))
+                              TextButton(onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => WordInfo(words[index], onlyInfo: true))), child: Text("See more"))
                             ],
                           ),
                         ),

@@ -32,4 +32,24 @@ class SearchService{
       opposites: opp.map((e) => e.toString()).toList(),
     );
   }
+
+  Future<List<String>> nextWords(String text) async {
+    String fileString = await rootBundle.loadString('assets/dictionnary.json');
+    var jsonObject = jsonDecode(fileString);
+
+    int i = 0;
+    List<String> result = [];
+
+    for(String el in jsonObject.keys.toList()){
+      if(i >= 30){
+        break;
+      }
+      if(el.startsWith(text)){
+        result.add(el);
+        i++;
+      }
+    }
+
+      return result;
+  }
 }

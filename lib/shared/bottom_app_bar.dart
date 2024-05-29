@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:french_words_learner/backend/learning_service.dart';
 import 'package:french_words_learner/custom_icons_icons.dart';
+import 'dart:io' show Platform;
 
 class MyBottomAppBar extends StatefulWidget {
 
@@ -19,8 +20,9 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
+      padding: EdgeInsets.fromLTRB(10, 10, 10, Platform.isIOS ? 40 : 20),
       child: Container(
+        height: 60,
         padding: EdgeInsets.fromLTRB(80, 5, 80, 5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
@@ -100,8 +102,8 @@ class _BottomAppBarItemState extends State<BottomAppBarItem> with TickerProvider
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40,
-      height: 40,
+      width: 50,
+      height: 50,
       child: Stack(
         children: [
           Align(
@@ -109,8 +111,8 @@ class _BottomAppBarItemState extends State<BottomAppBarItem> with TickerProvider
             child: ScaleTransition(
               scale: _animation,
               child: Container(
-                width: 40,
-                height: 40,
+                width: 50,
+                height: 50,
                 padding: EdgeInsets.all(5),
                 decoration: widget.selectedIndex ? BoxDecoration(
                   color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.25),
@@ -125,8 +127,9 @@ class _BottomAppBarItemState extends State<BottomAppBarItem> with TickerProvider
           Align(
             alignment: Alignment.bottomCenter,
             child: IconButton(
-                icon: widget.icon,
-                onPressed: widget.onPressed
+              iconSize: 30,
+              icon: widget.icon,
+              onPressed: widget.onPressed
             ),
           ),
         ],
