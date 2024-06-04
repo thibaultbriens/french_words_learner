@@ -13,6 +13,16 @@ class _SearchState extends State<Search> {
   final TextEditingController _searchCtrl = TextEditingController();
 
   List<String> searchList = [];
+  FocusNode _focusNode = FocusNode();
+  late void Function() openKeyboard;
+
+  @override
+  void initState() {
+    // open keyboard
+    _focusNode.requestFocus();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +34,13 @@ class _SearchState extends State<Search> {
             minHeight: 20 + 10 + 45,
             maxHeight: 20 + 10 + 45,
             child: Container(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.background,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
                 child: Container(
                   height: 45,
                   child: SearchBar(
+                    focusNode: _focusNode,
                     controller: _searchCtrl,
                     hintText: "Tapez un mot",
                     hintStyle: MaterialStateTextStyle.resolveWith(
@@ -38,16 +49,15 @@ class _SearchState extends State<Search> {
                     backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
                     trailing: [
                       IconButton(
-                          onPressed: () { _searchCtrl.clear(); setState(() => searchList = []);},
+                          onPressed: () { _searchCtrl.clear(); _focusNode.unfocus();setState(() => searchList = []);},
                           icon: Icon(Icons.clear))
                     ],
                     leading: IconButton(
                       onPressed: () => searchWord(),
                       icon: Icon(Icons.search)
                     ),
-                    onSubmitted: (value) async {
+                    onSubmitted: (value) {
                       // Update searchList
-                      print("submitted");
                       searchWord();
                     },
                   ),
@@ -68,6 +78,7 @@ class _SearchState extends State<Search> {
               }
 
               _searchCtrl.addListener(_searchCtrlListener);*/
+
 
               return ListView.builder(
                 shrinkWrap: true,
@@ -96,9 +107,26 @@ class _SearchState extends State<Search> {
     );
   }
 
-  void searchWord() async{
-    searchList = await SearchService().nextWords(_searchCtrl.text);
-    setState(() {});
+  Future<void> searchWord() async{
+    // dismiss keyboard
+    _focusNode.unfocus();
+
+    searchList = await SearchService().nextWords(_searchCtrl.text.trim());
+    if(searchList.isEmpty){
+      String currentText = _searchCtrl.text.trim();
+      showDialog(context: context, builder: (context){
+        return AlertDialog(
+          title: Text("Aucun résultat pour ${currentText}", style: TextStyle(fontSize: 19),),
+          actions: [
+            ElevatedButton(onPressed: () => Navigator.pop(context), child: Text("Fermer", style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),))
+          ],
+        );
+      });
+      _searchCtrl.clear();
+    }
+    setState(() {
+      
+    });
   }
 }
 

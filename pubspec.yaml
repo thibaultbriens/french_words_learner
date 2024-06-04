@@ -71,7 +71,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icons/flashcards.png
-    - assets/dictionnary.json
+    - assets/dictionary.json
+    
+    - assets/images/onboarding/idea-screen1.gif
+    - assets/images/onboarding/search-screenshot.PNG
+    - assets/images/onboarding/add-word-screenshot.png
+    - assets/images/onboarding/learning-screenshot.PNG
+    - assets/images/onboarding/settings-image.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

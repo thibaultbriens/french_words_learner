@@ -23,7 +23,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
       padding: EdgeInsets.fromLTRB(10, 10, 10, Platform.isIOS ? 40 : 20),
       child: Container(
         height: 60,
-        padding: EdgeInsets.fromLTRB(80, 5, 80, 5),
+        padding: EdgeInsets.fromLTRB(60, 5, 60, 5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           color: Theme.of(context).colorScheme.primary,

@@ -8,7 +8,7 @@ import 'package:french_words_learner/shared/word.dart';
 class SearchService{
 
   Future<List<String>> get allWords async {
-    String fileString = await rootBundle.loadString('assets/dictionnary.json');
+    String fileString = await rootBundle.loadString('assets/dictionary.json');
     var jsonObject = jsonDecode(fileString);
 
     return jsonObject.keys.toList();
@@ -16,7 +16,7 @@ class SearchService{
 
   Future<Word> wordNameToObject(String word) async {
 
-    String fileString = await rootBundle.loadString('assets/dictionnary.json');
+    String fileString = await rootBundle.loadString('assets/dictionary.json');
     var jsonObject = jsonDecode(fileString);
 
     Map<String, dynamic> wordData = jsonDecode(jsonObject[word]);
@@ -34,7 +34,7 @@ class SearchService{
   }
 
   Future<List<String>> nextWords(String text) async {
-    String fileString = await rootBundle.loadString('assets/dictionnary.json');
+    String fileString = await rootBundle.loadString('assets/dictionary.json');
     var jsonObject = jsonDecode(fileString);
 
     int i = 0;

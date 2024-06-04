@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(toolbarHeight: 5,),
+      appBar: AppBar(toolbarHeight: 2,),
       body: screenIndex == 0 
         ? Learn()
         : screenIndex == 1 
