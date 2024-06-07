@@ -14,14 +14,20 @@ class _SearchState extends State<Search> {
 
   List<String> searchList = [];
   FocusNode _focusNode = FocusNode();
-  late void Function() openKeyboard;
 
   @override
   void initState() {
     // open keyboard
-    _focusNode.requestFocus();
+    openKeyboard();
 
     super.initState();
+  }
+
+  void openKeyboard(){
+    _focusNode.requestFocus();
+  }
+  void clearSearch(){
+    _searchCtrl.clear();
   }
 
   @override
@@ -93,7 +99,7 @@ class _SearchState extends State<Search> {
                         context,
                         MaterialPageRoute(
                         builder:
-                          (context) => WordInfo(wordObj)
+                          (context) => WordInfo(wordObj, openSearchKeyboard: openKeyboard, clearSearch: clearSearch)
                         ),
                       );
                     }

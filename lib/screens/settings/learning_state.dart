@@ -58,8 +58,15 @@ class _LearningStateState extends State<LearningState> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: const Text("Delete the word from the list ?"),
+                                  title: const Text("Supprimer de ma liste d'apprentissage"),
                                   actions: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.white),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Annuler", style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),)),
                                     ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.red),
@@ -68,14 +75,7 @@ class _LearningStateState extends State<LearningState> {
                                           Navigator.pop(context);
                                           setState(() {});
                                         },
-                                        child: const Text("Yes", style: TextStyle(color: Colors.white),)),
-                                    ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.green),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text("No", style: TextStyle(color: Colors.white),)),
+                                        child: const Text("Oui", style: TextStyle(color: Colors.white),)),
                                   ],
                                 );
                               });

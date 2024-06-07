@@ -7,8 +7,10 @@ class WordInfo extends StatefulWidget {
 
   Word word;
   final bool onlyInfo; // Only to display words information => top right corner button not displayed
+  final void Function()? openSearchKeyboard;
+  final void Function()? clearSearch;
 
-  WordInfo(this.word, {this.onlyInfo = false});
+  WordInfo(this.word, {this.onlyInfo = false, this.openSearchKeyboard, this.clearSearch});
 
   @override
   State<WordInfo> createState() => _WordInfoState();
@@ -26,7 +28,13 @@ class _WordInfoState extends State<WordInfo> {
           children: [
             SizedBox(width: 8,),
             IconButton.filled(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                Navigator.pop(context);
+                if(widget.openSearchKeyboard != null)
+                  widget.openSearchKeyboard!();
+                if(widget.clearSearch != null)
+                  widget.clearSearch!();
+              } ,
               icon: Icon(Icons.arrow_back)
             ),
           ],

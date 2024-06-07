@@ -66,6 +66,13 @@ class _OnboardingState extends State<Onboarding> {
 
   List<OnboardingPage> pages = [
     OnboardingPage(
+      image: Image.asset("assets/images/onboarding/welcome-screen.gif"),
+      title: "Bienvenue sur Maitre'mot !",
+      secondary: Text("N'oubliez plus jamais les mots que vous rencontrez", style: TextStyle(fontSize: 14),),
+      heightPadding: 130,
+      betweenPadding: 130,
+    ),
+    OnboardingPage(
       image: Image.asset("assets/images/onboarding/idea-screen1.gif"),
       title: "Rencontrez un mot que vous ne connaissez pas",
     ),
