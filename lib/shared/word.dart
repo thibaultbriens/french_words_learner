@@ -32,7 +32,7 @@ class Word{
     return jsonString;
   }
 
-  Widget buildWordInfo(){
+  /*Widget buildWordInfo(){
     return ListView(
       shrinkWrap: true,
       children: [
@@ -43,31 +43,44 @@ class Word{
           itemBuilder: (context, index){
             return Padding(
               padding: const EdgeInsets.only(left: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Flexible(child: Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Text(definitions[index],),
-                  ))
-                ],
-              ),
+              child: Flexible(child: Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(definitions[index],),
+              )),
             );
           }
         ),
-        // synonymous != null && synonymous!.isNotEmpty? Flexible(child: Text("Synonymes: ${buildSynonymousText(synonymous!)}")) : Container(),
-        // opposites != null && opposites!.isNotEmpty? Flexible(child: Text("Contraires: ${buildSynonymousText(opposites!)}")) : Container(),
+        synonymous.isNotEmpty? Flexible(child: Text("Synonymes: ${buildSynonymousText(synonymous)}")) : Container(),
+        opposites.isNotEmpty? Flexible(child: Text("Contraires: ${buildSynonymousText(opposites)}")) : Container(),
+      ],
+    );
+  }*/
+
+   Widget buildWordInfo() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(word, textScaler: TextScaler.linear(1.8),),
+        SizedBox(height: 10),
+        ...definitions.map((definition) => Padding(
+          padding: const EdgeInsets.only(left: 12, top: 4),
+          child: Text(definition),
+        )).toList(),
+        SizedBox(height: 10),
+        if (synonymous.isNotEmpty) Text("Synonymes:\n${buildSynonymousText(synonymous)}"),
+        SizedBox(height: 5,),
+        if (opposites.isNotEmpty) Text("Contraires:\n${buildSynonymousText(opposites)}"),
       ],
     );
   }
   
-  String buildSynonymousText(List<Word> synonymous) { // synonymous can also be 'opposites' list
+  String buildSynonymousText(List<String> synonymous) { // synonymous can also be 'opposites' list
     String result = "";
 
     for(int i = 0; i < synonymous.length - 1; i++){
-      result += synonymous[i].word + ", ";
+      result += synonymous[i] + ", ";
     }
 
-    return result + synonymous[synonymous.length - 1].word;
+    return result + synonymous[synonymous.length - 1];
   }
 }

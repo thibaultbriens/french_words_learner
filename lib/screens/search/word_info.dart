@@ -45,8 +45,8 @@ class _WordInfoState extends State<WordInfo> {
         ],     
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
-        child: widget.word.buildWordInfo(),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+        child: SingleChildScrollView(child: widget.word.buildWordInfo()),
       ),
     );
   }
