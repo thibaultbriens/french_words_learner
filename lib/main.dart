@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:french_words_learner/home_view_chooser.dart';
-import 'package:french_words_learner/onboarding_ui/onboarding.dart';
-import 'package:french_words_learner/screens/home.dart';
+import 'dart:math';
 
-void main() {
+import 'package:flutter/material.dart';
+import 'package:french_words_learner/backend/notifications_service.dart';
+import 'package:french_words_learner/home_view_chooser.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationSercice().initialize();
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -30,3 +32,23 @@ final ColorScheme myColorScheme = ColorScheme(
   onError: Colors.black,
   brightness: Brightness.light,
 );
+
+class TestNotif extends StatelessWidget {
+  const TestNotif({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          ElevatedButton(onPressed: () async {
+            await NotificationSercice().showInstant(id: Random().nextInt(10), title: "Notif Titre", body: "C'est génial");
+          }, child: Text("Press for instant notif", style: TextStyle(color: Colors.white),)),
+          ElevatedButton(onPressed: () async {
+            await NotificationSercice().showDelayed(id: Random().nextInt(10), title: "Notif Titre", body: "C'est génial", interval: Duration(seconds: 5));
+          }, child: Text("Press for delayed notif", style: TextStyle(color: Colors.white),))
+        ],
+      ),
+    );
+  }
+}
