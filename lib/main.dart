@@ -10,7 +10,7 @@ void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
+      home:  HomeView(),
       theme: ThemeData(
         colorScheme: myColorScheme,
         useMaterial3: true
@@ -33,7 +33,7 @@ final ColorScheme myColorScheme = ColorScheme(
   brightness: Brightness.light,
 );
 
-class TestNotif extends StatelessWidget {
+/*class TestNotif extends StatelessWidget {
   const TestNotif({super.key});
 
   @override
@@ -41,14 +41,15 @@ class TestNotif extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          SizedBox(height: 200,),
           ElevatedButton(onPressed: () async {
             await NotificationSercice().showInstant(id: Random().nextInt(10), title: "Notif Titre", body: "C'est génial");
           }, child: Text("Press for instant notif", style: TextStyle(color: Colors.white),)),
           ElevatedButton(onPressed: () async {
-            await NotificationSercice().showDelayed(id: Random().nextInt(10), title: "Notif Titre", body: "C'est génial", interval: Duration(seconds: 5));
+            await NotificationSercice().addWordNotification(date: DateTime.now());
           }, child: Text("Press for delayed notif", style: TextStyle(color: Colors.white),))
         ],
       ),
     );
   }
-}
+}*/

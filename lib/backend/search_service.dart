@@ -33,6 +33,7 @@ class SearchService{
     );
   }
 
+  // load the 30 max words of the dictionary, starting by String [text] 
   Future<List<String>> nextWords(String text) async {
     String fileString = await rootBundle.loadString('assets/dictionary.json');
     var jsonObject = jsonDecode(fileString);

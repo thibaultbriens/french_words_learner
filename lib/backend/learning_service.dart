@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:french_words_learner/backend/notifications_service.dart';
 import 'package:french_words_learner/backend/search_service.dart';
 import 'package:french_words_learner/shared/word.dart';
 import 'package:localstore/localstore.dart';
@@ -11,6 +12,19 @@ class LearningService{
   final int firstLevel = 1;
 
   final db = Localstore.instance;
+
+  final NotificationSercice _notifService = NotificationSercice();
+
+  List<Duration> durationOnLevel = [
+    Duration(days: 1),
+    Duration(days: 1),
+    Duration(days: 2),
+    Duration(days: 3),
+    Duration(days: 7),
+    Duration(days: 15),
+    Duration(days: 30),
+    Duration(days: 60),
+  ];
 
   /// Get {level, lastly-seen} values of the word
   Future<Map<String, dynamic>> wordInfo (String word) async{ 
@@ -32,9 +46,12 @@ class LearningService{
     print("Adding word = $word");
     db.collection("learning").doc(word).set({
       "level": firstLevel,
-      "lastly-seen": DateTime.now().subtract(Duration(days: 1)).millisecondsSinceEpoch
+      "lastly-seen": DateTime.now().millisecondsSinceEpoch
     });
     //SetOptions(merge: true));
+
+    // add notification
+    _notifService.addWordNotification(date: DateTime.now().add(Duration(days: 1)));
   }
 
   /// Delete a word from learning list
@@ -63,6 +80,9 @@ class LearningService{
         "lastly-seen": DateTime.now().millisecondsSinceEpoch
       }, 
       SetOptions(merge: true));
+
+      // add notification
+      _notifService.addWordNotification(date: DateTime.now().add(durationOnLevel[currentLevel + 1 - 1]));
     }
   }
   
@@ -94,6 +114,9 @@ class LearningService{
       "lastly-seen": DateTime.now().millisecondsSinceEpoch
     }, 
     SetOptions(merge: true));
+
+    // add notification
+    _notifService.addWordNotification(date: DateTime.now().add(durationOnLevel[(currentLevel - 1).clamp(firstLevel, lastLevel) - 1]));
   }
 
 

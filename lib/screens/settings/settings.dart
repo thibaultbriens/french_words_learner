@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:french_words_learner/main.dart';
 import 'package:french_words_learner/screens/settings/learning_state.dart';
 
 class Settings extends StatelessWidget {
@@ -37,13 +36,13 @@ class Settings extends StatelessWidget {
               ],
             ),
           ),
-          ListTile(
+          /*ListTile(
             leading: Icon(Icons.pending),
             title: Text("Test notifications", style: TextStyle(fontSize: 14),),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => TestNotif()));
             },
-          )
+          )*/
         ],
       ),
     );

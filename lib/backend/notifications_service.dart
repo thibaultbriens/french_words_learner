@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 // for scheduled notif
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -6,6 +8,14 @@ import 'package:timezone/timezone.dart' as tz;
 class NotificationSercice {
 
   final _localNotifService = FlutterLocalNotificationsPlugin();
+
+  List<String> titles = [
+    "Continuez comme ça",
+    "Génial",
+    "Encore un petit effort",
+    "Temps de s'y mettre",
+    "C'est maintenant !"
+  ];
 
   Future<void> initialize() async {
     // Android
@@ -68,7 +78,7 @@ class NotificationSercice {
     required int id,
     required String title,
     required String body,
-    required Duration interval
+    required DateTime date
   }) async {
     tz.initializeTimeZones();
     final notifDetails = await _notificationDetails();
@@ -76,11 +86,29 @@ class NotificationSercice {
       id, 
       title, 
       body, 
-      tz.TZDateTime.from(DateTime.now().add(interval), tz.local), 
+      tz.TZDateTime.from(date, tz.local), 
       notifDetails, 
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime
     );
   }
 
+  /// Add a scheduled notification for a specific word
+  /// This function checks that a notification isn't already set up for this precise day
+  Future<void> addWordNotification ({
+    required DateTime date
+  }) async {
+    List<PendingNotificationRequest> pendingNotifs = await _localNotifService.pendingNotificationRequests();
+    for(int i = 0; i < pendingNotifs.length; i++){
+      if(pendingNotifs[i].id == dateId(date)){
+        return;
+      }
+    }
+    print("added notif for ${date}");
+    showDelayed(id: dateId(date), title: titles[Random().nextInt(titles.length)], body: "Venez swiper vos mots du jour pour continuer votre apprentissage", date: DateTime(date.year, date.month, date.day, 10));
+  }
+  
+  int dateId(DateTime date) {
+    return int.parse("${date.day.toString().padLeft(2, "0")}${date.month.toString().padLeft(2, "0")}${date.year}");
+  }
 }
