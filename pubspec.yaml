@@ -94,9 +94,9 @@ flutter:
     - assets/dictionary.json
     
     - assets/images/onboarding/idea-screen1.gif
-    - assets/images/onboarding/search-screenshot.PNG
-    - assets/images/onboarding/add-word-screenshot.png
-    - assets/images/onboarding/learning-screenshot.PNG
+    - assets/images/onboarding/search-word.gif
+    - assets/images/onboarding/word-info.gif
+    - assets/images/onboarding/learn-screen.gif
     - assets/images/onboarding/settings-image.png
     - assets/images/onboarding/welcome-screen.gif
 

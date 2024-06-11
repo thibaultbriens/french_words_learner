@@ -75,23 +75,26 @@ class _OnboardingState extends State<Onboarding> {
     OnboardingPage(
       image: Image.asset("assets/images/onboarding/idea-screen1.gif"),
       title: "Rencontrez un mot que vous ne connaissez pas",
+      secondary: Text("Dans un livre, un article ou bien une discussion", style: TextStyle(fontSize: 14),),
     ),
     OnboardingPage(
-      image: Image.asset("assets/images/onboarding/search-screenshot.PNG"),
+      image: Image.asset("assets/images/onboarding/search-word.gif"),
       title: "Cherchez le",
+      secondary: Text("Dans le dictionnaire intégré à l'application (pas besoin de connection Internet)", style: TextStyle(fontSize: 14),),
       heightPadding: 120,
       betweenPadding: 210,
     ),
     OnboardingPage(
-      image: Image.asset("assets/images/onboarding/add-word-screenshot.png"),
+      image: Image.asset("assets/images/onboarding/word-info.gif"),
       title: "Découvrez sa définition et ajoutez le à votre liste d'apprentissage",
       heightPadding: 110,
       betweenPadding: 200,
     ),
     OnboardingPage(
-      image: Image.asset("assets/images/onboarding/learning-screenshot.PNG"),
+      image: Center(child: Image.asset("assets/images/onboarding/learn-screen.gif", scale: 2.3,)),
       title: "Revenez chaque jour pour continuer l'apprentissage ludique",
-      betweenPadding: 50,
+      secondary: Text("Grace à la méthode d'apprentissage sur la durée, mémorisez pour la vie", style: TextStyle(fontSize: 14),),
+      betweenPadding: 40,
     ),
     OnboardingPage(
       image: Image.asset("assets/images/onboarding/settings-image.png"),
