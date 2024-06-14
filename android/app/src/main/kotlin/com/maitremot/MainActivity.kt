@@ -1,4 +1,4 @@
-package com.example.french_words_learner
+package com.maitremot
 
 import io.flutter.embedding.android.FlutterActivity
 
